@@ -1,9 +1,18 @@
 [project]
 name = "magnolia"
 version = "0.0.1"
+dependencies = [
+  "black",
+  "pylint"
+]
+requires-python = ">=3.8"
+authors = [
+  {name = "Ualiton Ventura", email = "ualivent@gmail.com"},
+]
+maintainers = [
+  {name = "Ualiton Ventura", email = "ualivent@gmail.com"}
+]
 description = "Package Manager for Oberon-Scala Implementation."
-authors = ["ualivent@gmail.com"]
-
-[project.dependencies]
-black = "^23.3.0"
-pylint = "^3.0.0"
+readme = "README.md"
+license = {file = "LICENSE"}
+keywords = ["package", "manager"]
