@@ -1,2 +1,2 @@
 # magnolia
-Package Manager for Oberon-Scala Implementation
+Package Manager for Oberon-Scala Implementation.
