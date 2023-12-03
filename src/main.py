@@ -5,6 +5,7 @@ application for Magnolia usage.
 
 from argparse import ArgumentParser
 
+
 def get_arguments():
     """
     Get command line arguments.
@@ -34,6 +35,7 @@ def main():
         print("Run option enabled.")
     else:
         print("Option not defined.")
+
 
 if __name__ == "__main__":
     main()
