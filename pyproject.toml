@@ -1,0 +1,9 @@
+[project]
+name = "magnolia"
+version = "0.0.1"
+description = "Package Manager for Oberon-Scala Implementation."
+authors = ["ualivent@gmail.com"]
+
+[project.dependencies]
+black = "^23.3.0"
+pylint = "^3.0.0"
