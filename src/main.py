@@ -5,6 +5,7 @@ application for Magnolia usage.
 
 from argparse import ArgumentParser
 
+from project.project import Project
 
 def get_arguments():
     """
@@ -13,6 +14,9 @@ def get_arguments():
     parser = ArgumentParser(description="Magnolia commands.")
     parser.add_argument(
         "--install", "-i", help="Install dependencies from a given file", required=False
+    )
+    parser.add_argument(
+        "--project", "-p", help="Project path, the default is the current path", default="."
     )
     parser.add_argument(
         "--run", "-r", help="Run magnolia over a project", required=False
@@ -28,7 +32,13 @@ def main():
     arguments = get_arguments()
 
     if arguments.install and arguments.run:
-        print("ERROR: You cannot run and install at the same time.")
+        print("ERROR: Two operations at the same time not supported.")
+        exit(-1)
+    elif not arguments.install and not arguments.run:
+        print("ERROR: An operation must be defined.")
+
+    project = Project(arguments.project)
+
     if arguments.install:
         print("Install option defined.")
     elif arguments.run:
