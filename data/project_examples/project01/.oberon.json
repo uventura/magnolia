@@ -1,0 +1,9 @@
+{
+    "name": "First Project",
+    "dependencies": {
+        "my_dependency": {
+            "version": "0.0.1"
+        }
+    },
+    "interpreter": "oberourl/interpreter.jar"
+}

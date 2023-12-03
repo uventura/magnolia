@@ -11,5 +11,5 @@ python -m pylint --recursive=y src
 
 Or you could use from the root directory:
 ```shell
-python ./tools/check.py --path path/to/be/analyzed
+python ./tools/format_check.py --path path/to/be/analyzed
 ```
