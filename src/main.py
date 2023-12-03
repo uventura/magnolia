@@ -7,6 +7,7 @@ from argparse import ArgumentParser
 
 from project.project import Project
 
+
 def get_arguments():
     """
     Get command line arguments.
@@ -16,7 +17,10 @@ def get_arguments():
         "--install", "-i", help="Install dependencies from a given file", required=False
     )
     parser.add_argument(
-        "--project", "-p", help="Project path, the default is the current path", default="."
+        "--project",
+        "-p",
+        help="Project path, the default is the current path",
+        default=".",
     )
     parser.add_argument(
         "--run", "-r", help="Run magnolia over a project", required=False
