@@ -1,19 +1,28 @@
+"""
+    Format Check:
+        - Black
+        - Pylint
+"""
+
 import subprocess
 
 from argparse import ArgumentParser
 
-def get_arguments():
+
+def _get_arguments():
     """
     Get command line arguments.
     """
     parser = ArgumentParser(description="Checker commands.")
-    parser.add_argument(
-        "--path", "-p", help="Path to run the checker", default = "."
-    )
+    parser.add_argument("--path", "-p", help="Path to run the checker", default=".")
 
     return parser.parse_args()
 
+
 def format_code_with_black(file_path):
+    """
+    Run Black
+    """
     print("Running Black...")
     try:
         subprocess.run(["black", file_path], check=True)
@@ -22,7 +31,11 @@ def format_code_with_black(file_path):
         print(f"  Error formatting code: {e}")
     print()
 
+
 def run_pylint(file_path):
+    """
+    Run pylint
+    """
     print("Running pylint...")
     try:
         subprocess.run(["pylint", file_path], check=True)
@@ -31,11 +44,15 @@ def run_pylint(file_path):
         print(f"Error running Pylint: {e}")
     print()
 
+
 def main():
-    arguments = get_arguments()
+    """
+    Main function
+    """
+    arguments = _get_arguments()
     format_code_with_black(arguments.path)
     run_pylint(arguments.path)
 
-        
+
 if __name__ == "__main__":
     main()
