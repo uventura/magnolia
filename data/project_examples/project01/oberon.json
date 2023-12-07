@@ -9,5 +9,6 @@
 	"repository": [
 		"rep1",
 		"rep2"
-	]
+	],
+	"cache": ".my_cache"
 }

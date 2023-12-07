@@ -17,6 +17,8 @@ PROJECT_FILENAME = "oberon.json"
 
 CACHE_ENVIRONMENT_VAR = "OBERON_CACHE"
 DEFAULT_CACHE = Path.home() / "cache_oberon"
+PROJECT_GLOBAL_CACHE = "OBERON_GLOBAL_CACHE"
+PROJECT_ENVIRON_CACHE_NAME = "OBERON_DEPS_CACHE"
 
 
 class Project:
@@ -54,11 +56,20 @@ class Project:
         return project_json
 
     def _define_cache(self, project_data):
+        cache = None
         if "cache" in project_data:
-            return project_data["cache"]
-        if os.environ.get(CACHE_ENVIRONMENT_VAR):
-            return os.environ[CACHE_ENVIRONMENT_VAR]
+            cache = project_data["cache"]
+        elif os.environ.get(CACHE_ENVIRONMENT_VAR):
+            cache = os.environ[CACHE_ENVIRONMENT_VAR]
+        else:
+            cache = DEFAULT_CACHE
 
-        if not os.path.exists(DEFAULT_CACHE):
-            os.mkdir(DEFAULT_CACHE)
-        return DEFAULT_CACHE
+        self._create_cache_path(Path(self.project_path) / cache)
+        os.environ[PROJECT_ENVIRON_CACHE_NAME] = str(Path(self.project_path) / cache)
+        os.environ[PROJECT_GLOBAL_CACHE] = str(DEFAULT_CACHE)
+
+        return cache
+
+    def _create_cache_path(self, cache_path):
+        if not os.path.exists(cache_path):
+            os.mkdir(cache_path)
