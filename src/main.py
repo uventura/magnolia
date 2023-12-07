@@ -3,6 +3,7 @@ This Main Script Loads the basic
 application for Magnolia usage.
 """
 
+import sys
 from argparse import ArgumentParser
 
 from project.project import Project
@@ -37,7 +38,7 @@ def main():
 
     if arguments.install and arguments.run:
         print("ERROR: Two operations at the same time not supported.")
-        exit(-1)
+        sys.exit(-1)
     elif not arguments.install and not arguments.run:
         print("ERROR: An operation must be defined.")
 

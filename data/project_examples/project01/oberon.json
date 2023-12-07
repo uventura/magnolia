@@ -1,0 +1,13 @@
+{
+	"name": "myproject",
+	"version": "1.0.0",
+	"dependencies": {
+		"dep": {
+			"version": "1.0.0"
+		}
+	},
+	"repository": [
+		"rep1",
+		"rep2"
+	]
+}
