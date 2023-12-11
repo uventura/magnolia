@@ -3,6 +3,7 @@ This Main Script Loads the basic
 application for Magnolia usage.
 """
 
+import sys
 from argparse import ArgumentParser
 
 from project.project import Project
@@ -46,6 +47,7 @@ def main():
         print("ERROR: An operation must be defined.")
 
     project = Project(arguments.project)
+    print(project.cache)
 
     if arguments.install:
         print("Install option defined.")
