@@ -20,6 +20,14 @@ DEFAULT_CACHE = Path.home() / "cache_oberon"
 PROJECT_GLOBAL_CACHE = "OBERON_GLOBAL_CACHE"
 PROJECT_ENVIRON_CACHE_NAME = "OBERON_DEPS_CACHE"
 
+def get_dot_oberon():
+    """
+    Get .oberon.json content.
+    """
+    f = open(PROJECT_FILENAME)
+    data = json.load(f)
+    f.close()
+    return data
 
 class Project:
     """
