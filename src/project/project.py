@@ -13,13 +13,16 @@ import os
 import sys
 import json
 
-PROJECT_FILENAME = "oberon.json"
+PROJECT_FILENAME = ".oberon.json"
 
-CACHE_ENVIRONMENT_VAR = "OBERON_CACHE"
-DEFAULT_CACHE = Path.home() / "cache_oberon"
-PROJECT_GLOBAL_CACHE = "OBERON_GLOBAL_CACHE"
-PROJECT_ENVIRON_CACHE_NAME = "OBERON_DEPS_CACHE"
-
+def get_dot_oberon():
+    """
+    Get .oberon.json content.
+    """
+    f = open(PROJECT_FILENAME)
+    data = json.load(f)
+    f.close()
+    return data
 
 class Project:
     """
@@ -28,10 +31,11 @@ class Project:
 
     # pylint: disable=too-few-public-methods
     def __init__(self, project_path):
-        self.project_path = Path(project_path)
-        project_file_path = self.project_path / PROJECT_FILENAME
+        project_path = Path(project_path)
+        self.project_file = project_path / PROJECT_FILENAME
+        self.data = get_dot_oberon()
 
-        if not project_file_path.is_file():
+        if not project_file.is_file():
             print(
                 (
                     "ERROR: Project file not defined, please define "
