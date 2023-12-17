@@ -45,7 +45,7 @@ class Project:
         self.dependencies = self._get_optional_key("dependencies", data)
         self.repositories = self._get_optional_key("repositories", data)
         self.cache = self._define_cache()
-        self.interpreter = self._get_interpreter()
+        self.interpreter = self._get_interpreter(data)
 
     def _define_project_varibles_empty(self):
         self.name = "undefined"

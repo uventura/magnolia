@@ -6,7 +6,8 @@ from cmd_arguments.cmd_arguments import CmdArguments
 from environment.environment import Environment
 from project.project import Project
 from runner.runner import Runner
-from tester.tester import Tester
+
+# from tester.tester import Tester
 
 
 def get_arguments():

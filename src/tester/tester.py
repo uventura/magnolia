@@ -1,10 +1,18 @@
+"""
+Main tester class.
+"""
 import subprocess
 
 
 class Tester:
-    def __init__(project):
+    """
+    Tester will run Oberon tests and check its results.
+    """
+
+    # pylint: disable=too-few-public-methods
+    def __init__(self):
         process = subprocess.run(
-            ["sbt", "test"], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+            ["sbt", "test"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True
         )
 
         lines = str(process.stdout).split("\\n")
