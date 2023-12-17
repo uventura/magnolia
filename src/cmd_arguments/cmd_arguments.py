@@ -1,6 +1,7 @@
 """
 Arguments interface for Magnolia.
 """
+from collections import namedtuple
 import sys
 
 NUM_ARGUMENTS_IN_LINE = 3
@@ -30,12 +31,17 @@ class CmdArguments:
     def __init__(self, arguments):
         self.args = arguments
 
-        self.arg = self._argument_existence()
-        if self.arg == "help":
+        arg = self._argument_existence()
+        if arg == "help":
             self._helper()
+        command = namedtuple("Command", ["type", "value"])
+        self.arg = command(arg[0], arg[1])
 
     def _argument_existence(self):
         cmd_args = sys.argv[1:]
+        if len(cmd_args) == 0:
+            print("[ERROR] Please choose a commad")
+            sys.exit(-1)
         if len(cmd_args) == 1 and (cmd_args[0] == "-h" or cmd_args[0] == "--help"):
             return "help"
 
