@@ -24,7 +24,7 @@ class Project:
     """
 
     # pylint: disable=too-few-public-methods
-    def __init__(self, project_path, use_project_file = True):
+    def __init__(self, project_path, use_project_file=True):
         self.project_path = Path(project_path)
         project_file_path = self.project_path / PROJECT_FILENAME
 
@@ -81,7 +81,8 @@ class Project:
         if not os.path.exists(cache_path):
             os.mkdir(cache_path)
 
-    def _get_interpreter(self, data = {}):
+    # pylint: disable=dangerous-default-value
+    def _get_interpreter(self, data={}):
         if "interpreter" in data:
             return data["interpreter"]
         return os.environ.get("OBERON_INTERPRETER")
