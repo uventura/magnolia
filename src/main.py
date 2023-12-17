@@ -6,59 +6,32 @@ application for Magnolia usage.
 import sys
 from argparse import ArgumentParser
 
+from cmd_arguments.cmd_arguments import CmdArguments
 from project.project import Project
 from runner.runner import Runner
 from tester.tester import Tester
+
 
 def get_arguments():
     """
     Get command line arguments.
     """
-    parser = ArgumentParser(description="Magnolia commands.")
-    parser.add_argument(
-        "--install", "-i", help="Install dependencies from a given file", required=False
-    )
-    parser.add_argument(
-        "--project",
-        "-p",
-        help="Project path, the default is the current path",
-        default=".",
-    )
-    parser.add_argument(
-        "--run", "-r", help="Run magnolia over a project", required=False
-    )
-    parser.add_argument(
-        "--test", "-t", help="Run all tests of Oberon-Scala", required=False
-    )
+    args = {
+        "init": {"default": ".", "description": "Init a magnolia project"},
+        "install": {"description": "Install a magnolia program"},
+        "run": {"description": "Run an oberon program"},
+        "test": {"description": "Run tests"},
+    }
 
-    return parser.parse_args()
+    return CmdArguments(args).arg
 
 
 def main():
     """
     Main application.
     """
-    arguments = get_arguments()
-
-    if arguments.install and arguments.run and arguments.test:
-        print("ERROR: Two operations at the same time not supported.")
-        sys.exit(-1)
-    elif not arguments.install and not arguments.run:
-        print("ERROR: An operation must be defined.")
-
-    project = Project(arguments.project)
-    print(project.cache)
-
-    if arguments.install:
-        print("Install option defined.")
-    elif arguments.run:
-        print("Run option enabled.")
-        Runner.__init__(project)
-    elif arguments.test:
-        print("Running tests...")
-        Tester.__init__(project)
-    else:
-        print("Option not defined.")
+    command = get_arguments()
+    print(command)
 
 
 if __name__ == "__main__":
