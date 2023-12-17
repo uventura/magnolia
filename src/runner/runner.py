@@ -1,5 +1,18 @@
-import os
+"""
+Runner class.
+"""
+
+import subprocess
+
 
 class Runner:
-    def __init__(project):
-        os.system('java -jar ' + project.data['interpreter'] + ' interpreter -i ' + project.data['main'])
+    """
+    Run a single oberon file. The command line will be:
+        magnolia run file.oberon
+    """
+
+    # pylint: disable=too-few-public-methods
+    def __init__(self, interpreter, file):
+        subprocess.run(
+            ["java", "-jar", interpreter, "interpreter", "-i", file], check=True
+        )

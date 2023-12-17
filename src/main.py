@@ -2,10 +2,6 @@
 This Main Script Loads the basic
 application for Magnolia usage.
 """
-
-import sys
-from argparse import ArgumentParser
-
 from cmd_arguments.cmd_arguments import CmdArguments
 from environment.environment import Environment
 from project.project import Project
@@ -35,12 +31,10 @@ def main():
     command = get_arguments()
 
     if command.type == "init":
-        print("Project mode")
         Project(command.value)
     elif command.type == "install":
         print("Install mode")
     elif command.type == "run":
-        print("Run Mode")
         project = Project(".", False)
         Runner(project.interpreter, command.value)
     elif command.type == "test":
