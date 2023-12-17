@@ -14,7 +14,7 @@ def _get_arguments():
     Get command line arguments.
     """
     parser = ArgumentParser(description="Checker commands.")
-    parser.add_argument("--path", "-p", help="Path to run the checker", default=".")
+    parser.add_argument("--path", "-p", help="Path to run the checker", default="src")
 
     return parser.parse_args()
 
