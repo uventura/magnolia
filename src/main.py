@@ -7,6 +7,7 @@ import sys
 from argparse import ArgumentParser
 
 from cmd_arguments.cmd_arguments import CmdArguments
+from environment.environment import Environment
 from project.project import Project
 from runner.runner import Runner
 from tester.tester import Tester
@@ -30,8 +31,20 @@ def main():
     """
     Main application.
     """
+    Environment()
     command = get_arguments()
-    print(command)
+
+    if command.type == "init":
+        print("Project mode")
+        Project(command.value)
+    elif command.type == "install":
+        print("Install mode")
+    elif command.type == "run":
+        print("Run Mode")
+        project = Project(".", False)
+        Runner(project.interpreter, command.value)
+    elif command.type == "test":
+        print("Test mode")
 
 
 if __name__ == "__main__":
