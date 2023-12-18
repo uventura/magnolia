@@ -4,6 +4,8 @@ Environment Setup Class
 from pathlib import Path
 import os
 
+from logger.logger import Logger
+
 CACHE_NAME = ".oberon"
 DEFAULT_CACHE = Path.home() / CACHE_NAME
 
@@ -26,7 +28,7 @@ class Environment:
         if not os.path.exists(DEFAULT_CACHE / "libs"):
             os.mkdir(DEFAULT_CACHE / "libs")
         if not os.path.exists(DEFAULT_CACHE / "bin"):
-            print(
+            Logger.warning(
                 "[WARNING] Error to get global interpreter. Put `oberon.jar` "
                 f'in {DEFAULT_CACHE / "bin"}'
             )
