@@ -2,19 +2,17 @@
 Main Installer class.
 """
 import os
-import requests
-import json
-import sys
-
-from urllib.parse import urlparse
-from pathlib import Path
 from zipfile import ZipFile
 from collections import namedtuple
+from urllib.parse import urlparse
+
+import requests
 
 from logger.logger import Logger
 from logger.colors import Colors
 
 ACCEPTED_FILE_TYPES = ["zip", "rar"]
+
 
 # pylint: disable=too-few-public-methods
 class Installer:
@@ -28,9 +26,11 @@ class Installer:
 
     def __init__(self, cache_path):
         self.cache_path = cache_path
-        pass
 
     def install_all_deps(self, repositories, dependencies):
+        """
+        Install all dependencies.
+        """
         repositories = list(set(repositories))
         dependencies = list(set(dependencies))
 
@@ -51,6 +51,9 @@ class Installer:
                 Logger.error_progress(f"{dep}: Not found.")
 
     def install(self, url):
+        """
+        Install a specific dependency.
+        """
         result = self.install_dep(url)
         if result["result"]:
             print(result["message"])
@@ -59,49 +62,51 @@ class Installer:
             print(error)
 
     def install_dep(self, url):
+        """
+        Install dependency single instance.
+        """
         url_checked = self._check_url_consistency(url)
         if url_checked.errors:
             install_result = {
                 "result": False,
                 "errors": url_checked.errors,
                 "message": None,
-                "url": url
+                "url": url,
             }
             return install_result
 
-        download_path = (self.cache_path + "/" + url_checked.filename + "." + url_checked.filetype)
-        folder_path = (self.cache_path + "/" + url_checked.filename)
+        download_path = (
+            self.cache_path + "/" + url_checked.filename + "." + url_checked.filetype
+        )
+        folder_path = self.cache_path + "/" + url_checked.filename
 
         errors = []
-        response = requests.get(url, stream=True)
+        response = requests.get(url, stream=True, timeout=300)
         if response.status_code == 404:
             errors.append(Colors.red("404: File not found."))
         elif response.status_code != 200:
             errors.append(Colors.red("HTTP Error " + str(response.status_code)))
 
         if errors:
-            return {
-                "result": False,
-                "errors": errors,
-                "message": None,
-                "url": url
-            }
+            return {"result": False, "errors": errors, "message": None, "url": url}
 
         os.makedirs(os.path.dirname(download_path), exist_ok=True)
         with open(download_path, "wb") as f:
             f.write(response.content)
 
         os.makedirs(os.path.dirname(folder_path), exist_ok=True)
-        with ZipFile(download_path, "r") as zObject:
-            zObject.extractall(folder_path)
+        with ZipFile(download_path, "r") as z_object:
+            z_object.extractall(folder_path)
 
         os.remove(download_path)
 
         return {
             "result": True,
-            "message": Colors.green(f"Dependency {url_checked.filename} downloaded from {url}"),
+            "message": Colors.green(
+                f"Dependency {url_checked.filename} downloaded from {url}"
+            ),
             "errors": [],
-            "url": url
+            "url": url,
         }
 
     def _check_url_consistency(self, url):
@@ -112,7 +117,7 @@ class Installer:
             error_type.append(Colors.red("Wrong URL Scheme"))
         if not parsed_url.netloc:
             error_type.append(Colors.red("Wrong netlocation URL."))
-        if (parsed_url.path.split(".")[-1] not in ACCEPTED_FILE_TYPES):
+        if parsed_url.path.split(".")[-1] not in ACCEPTED_FILE_TYPES:
             error_type.append(Colors.red("File type provided not accepted."))
 
         url_check = namedtuple("UrlCheck", ["filename", "filetype", "errors"])
