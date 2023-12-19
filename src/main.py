@@ -41,6 +41,8 @@ def main():
         installer.install(command.value)
     elif command.type == "run":
         project = Project(".", False)
+        installer = Installer(env.library_cache)
+        installer.install_all_deps(project.repositories, project.dependencies)
         Runner(project.interpreter, command.value)
     elif command.type == "test":
         print("Test mode")
