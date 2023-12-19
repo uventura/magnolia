@@ -34,10 +34,10 @@ def main():
 
     if command.type == "init":
         project = Project(command.value)
-        installer = Installer(env.libraby_cache)
-        installer.install_all_deps(project.dependencies, project.repositories)
+        installer = Installer(env.library_cache)
+        installer.install_all_deps(project.repositories, project.dependencies)
     elif command.type == "install":
-        installer = Installer(env.libraby_cache)
+        installer = Installer(env.library_cache)
         installer.install(command.value)
     elif command.type == "run":
         project = Project(".", False)

@@ -37,5 +37,5 @@ class Environment:
         os.environ[LIBRARY_CACHE] = str(DEFAULT_CACHE / "libs")
         os.environ[INTERPRETER] = str(DEFAULT_CACHE / "bin" / INTERPRETER_NAME)
 
-        self.libraby_cache = os.environ[LIBRARY_CACHE]
+        self.library_cache = os.environ[LIBRARY_CACHE]
         self.interpreter = os.environ[INTERPRETER]
