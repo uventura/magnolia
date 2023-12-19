@@ -1,7 +1,12 @@
 {
     "name": "hello_world",
     "version": "0.0.1",
-    "dependencies": [],
-    "repositories": [],
+    "dependencies": [
+        "48824-8",
+        "48823-h"
+    ],
+    "repositories": [
+        "http://www.gutenberg.lib.md.us/4/8/8/2/48824"
+    ],
     "interpreter": "interpreter/oberon.jar"
 }

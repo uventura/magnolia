@@ -25,3 +25,27 @@ class Logger:
         """
         prefix = Colors.yellow("[Magnolia Warning]")
         print(f"{prefix} {message}")
+
+    @staticmethod
+    def success(message):
+        """
+        Print a colorful sucess message.
+        """
+        prefix = Colors.green("[Magnolia Success]")
+        print(f"{prefix} {message}")
+
+    @staticmethod
+    def successfull_progress(message):
+        """
+        Print a colorful sucess message.
+        """
+        result = Colors.green(message)
+        print(f"{result}")
+
+    @staticmethod
+    def error_progress(message):
+        """
+        Print a colorful error message.
+        """
+        result = Colors.red(message)
+        print(f"{result}")
