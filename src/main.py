@@ -6,6 +6,7 @@ from cmd_arguments.cmd_arguments import CmdArguments
 from environment.environment import Environment
 from project.project import Project
 from runner.runner import Runner
+from installer.installer import Installer
 
 # from tester.tester import Tester
 
@@ -28,13 +29,16 @@ def main():
     """
     Main application.
     """
-    Environment()
+    env = Environment()
     command = get_arguments()
 
     if command.type == "init":
-        Project(command.value)
+        project = Project(command.value)
+        installer = Installer(env.libraby_cache)
+        installer.install_all_deps(project.dependencies, project.repositories)
     elif command.type == "install":
-        print("Install mode")
+        installer = Installer(env.libraby_cache)
+        installer.install(command.value)
     elif command.type == "run":
         project = Project(".", False)
         Runner(project.interpreter, command.value)
