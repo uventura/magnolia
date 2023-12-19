@@ -10,17 +10,22 @@ class Tester:
     """
 
     # pylint: disable=too-few-public-methods
-    def __init__(self):
+    def __init__(self, interpreter, file):
+        
         process = subprocess.run(
-            ["sbt", "test"], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True
+            ["java", "-jar", interpreter, "interpreter", "-vi", file], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, check=True
         )
+        output = str(process.stdout.decode('UTF-8')).replace("\\n", "\n").strip()
 
-        lines = str(process.stdout).split("\\n")
+        f = open("main.test", "r")
+        mainTest = f.read()
+        f.close()
+        
+        if(mainTest == output):
+            print("Test passed")
+        else:
+            print("Test failed")
 
-        print("All tests completed")
 
-        for i in lines:
-            if i.find("All tests passed") > 0:
-                print("All tests passed")
-            elif i.find("fail"):
-                print(i)
+        
+        

@@ -7,7 +7,7 @@ from environment.environment import Environment
 from project.project import Project
 from runner.runner import Runner
 
-# from tester.tester import Tester
+from tester.tester import Tester
 
 
 def get_arguments():
@@ -39,7 +39,8 @@ def main():
         project = Project(".", False)
         Runner(project.interpreter, command.value)
     elif command.type == "test":
-        print("Test mode")
+        project = Project(".", False)
+        Tester(project.interpreter, command.value)
 
 
 if __name__ == "__main__":
