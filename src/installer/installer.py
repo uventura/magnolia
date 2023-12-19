@@ -34,6 +34,9 @@ class Installer:
         repositories = list(set(repositories))
         dependencies = list(set(dependencies))
 
+        if not repositories and not dependencies:
+            return
+
         for dep in dependencies:
             found = False
             if not repositories:
