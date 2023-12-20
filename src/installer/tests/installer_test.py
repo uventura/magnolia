@@ -1,18 +1,17 @@
 """
 Unit Test module for the Installer Class.
 """
-
-import unittest
+from installer import Installer
+from logger.colors import Colors
 from unittest.mock import patch
 
+import unittest
 import os
 import sys
 
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_root)
 
-from installer import Installer
-from logger.colors import Colors
 
 
 class TestInstaller(unittest.TestCase):
