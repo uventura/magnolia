@@ -9,9 +9,9 @@ from urllib.parse import urlparse
 import requests
 
 import sys
+
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_root)
-
 
 from logger.logger import Logger
 from logger.colors import Colors
@@ -107,7 +107,7 @@ class Installer:
             errors.append("ZipFile ERROR: Corrupt zipfile!")
             os.remove(download_path)
             return {"result": False, "errors": errors, "message": None, "url": url}
-        
+
         os.remove(download_path)
 
         return {
