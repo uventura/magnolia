@@ -40,7 +40,7 @@ class CmdArguments:
     def _argument_existence(self):
         cmd_args = sys.argv[1:]
         if len(cmd_args) == 0:
-            print("[ERROR] Please choose a commad")
+            print("[ERROR] Please choose a command.")
             sys.exit(-1)
         if len(cmd_args) == 1 and (cmd_args[0] == "-h" or cmd_args[0] == "--help"):
             return "help"
