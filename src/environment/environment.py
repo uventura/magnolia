@@ -1,8 +1,14 @@
 """
 Environment Setup Class
 """
-from pathlib import Path
 import os
+import sys
+
+# Adjusting the sys.path to include the project root
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, project_root)
+
+from pathlib import Path
 
 from logger.logger import Logger
 
