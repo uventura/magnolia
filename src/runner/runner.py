@@ -18,10 +18,10 @@ class Runner:
     # pylint: disable=too-few-public-methods
     def __init__(self, interpreter, file):
         if not os.path.isfile(interpreter):
-            Logger.error(f"The interpreter `{interpreter}` does not exists.")
+            Logger.error(f"The interpreter `{interpreter}` does not exist.")
             sys.exit(-1)
         if not os.path.isfile(file):
-            Logger.error(f"The file `{file}` does not exists.")
+            Logger.error(f"The file `{file}` does not exist.")
             sys.exit(-1)
 
         subprocess.run(
