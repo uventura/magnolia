@@ -1,0 +1,25 @@
+(br.unb.cic.oberon.environment.Environment@37883b97,CharValue(a))
+top_loc: 1
+locations:
+  Location(0): CharValue(a)
+global:
+  v: Location(0)
+stack:
+procedures:
+  DEC:
+  RND:
+  READFILE:
+  ODD:
+  FLT:
+  STRINGTOINT:
+  ABS:
+  FLOOR:
+  STRINGTOREAL:
+  SQR:
+  WRITEFILE:
+  POW:
+  CEIL:
+  APPENDFILE:
+  INC:
+tests:
+userDefinedTypes:
